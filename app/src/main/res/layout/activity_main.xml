@@ -24,6 +24,7 @@
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="1dp"
             android:maxLines="1"
+            android:inputType="textUri"
             android:id="@+id/searchedit" />
 
         <Button
