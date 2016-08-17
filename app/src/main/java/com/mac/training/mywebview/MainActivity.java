@@ -2,6 +2,7 @@ package com.mac.training.mywebview;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -17,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
     private class InternalWebView extends WebViewClient {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-            view.loadUrl(request.getUrl().getHost());
+            view.loadUrl(request.getUrl().getPath());
             return true;
         }
     }
@@ -35,5 +36,20 @@ public class MainActivity extends AppCompatActivity {
         searchEdit = (EditText) findViewById(R.id.searchedit);
 
         searchButton = (Button) findViewById(R.id.searchbutton);
+
+        searchButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                StringBuffer sb = new StringBuffer();
+                sb.append(searchEdit.getText().toString());
+
+                if (sb.indexOf("http") < 0) {
+                    sb.insert(0, "http://");
+                }
+
+                mainWebView.loadUrl(sb.toString());
+            }
+        });
     }
 }
